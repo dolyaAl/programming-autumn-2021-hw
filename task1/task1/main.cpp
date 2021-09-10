@@ -25,12 +25,17 @@ void fill(LinkedList& list)
 	}
 }
 
+bool ifing(Node* t)
+{
+	return t->data % 2 == 0;
+}
+
 int main()
 {
 	LinkedList list;
 	std::cout << "First print: ";
 	list.print();
-	std::cout << "trying to fill the list" << std::endl;
+	std::cout << "trying to fill the list:" << std::endl;
 	fill(list);
 
 	if (list.last() != nullptr)
@@ -45,8 +50,31 @@ int main()
 	{
 		std::cout << "get_ptr(5) = " << list.get_ptr(5)->data << std::endl;
 	}
+
 	std::cout << "delete last:" << std::endl;
 	list.del_last();
 	list.print();
+	std::cout << std::endl;
+
+	std::cout << "insertptr(10,5):" << std::endl;
+	list.insertptr(10, 5);
+	list.print();
+	std::cout << std::endl;
+
+	std::cout << "delptr(10,5):" << std::endl;
+	list.delptr(5);
+	list.print();
+	std::cout << std::endl;
+
+	std::cout << "reverse():" << std::endl;
+	list.reverse();
+	list.print();
+	std::cout << std::endl;
+
+	std::cout << "remove_if() [t->data % 2 == 0]:" << std::endl;
+	list.remove_if(ifing);
+	list.print();
+	std::cout << std::endl;
+
 	return 1;
 }

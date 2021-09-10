@@ -88,6 +88,102 @@ void LinkedList::del_last()
 	delete t;
 }
 
+void LinkedList::insertptr(int d, int n)
+{
+	if (n == 0)
+	{
+		add_first(d);
+		return;
+	}
+	else if (n == getlenght())
+	{
+		add_last(d);
+		return;
+	}
+	else if (!indexValid(n))
+	{
+		return;
+	}
+	get_ptr(n - 1)->next = new Node(d, get_ptr(n));
+	
+}
+
+void LinkedList::delptr(int n)
+{
+	if (!indexValid(n))
+	{
+		return;
+	}
+	else if (n == 0)
+	{
+		Node* t;
+		t = get_ptr(n);
+		head = head->next;
+		delete t;
+		return;
+	}
+	Node* t;
+	t = get_ptr(n);
+	get_ptr(n - 1)->next = get_ptr(n)->next;
+	delete t;
+}
+
+void LinkedList::reverse()
+{
+	Node* t;
+	t = head;
+	int i = 0;
+	while (indexValid(i))
+	{
+		t = head;
+		head = head->next;
+		insert(getlenght()-i, t);
+		++i;
+	}
+}
+
+void LinkedList::remove_if(bool (*fnc)(Node*))
+{
+	Node* t;
+	t = head;
+	int i = 0;
+	while (t != nullptr)
+	{
+		if (fnc(t))
+		{
+			t = t->next;
+			delptr(i);
+		}
+		else
+		{
+			++i;
+			t = t->next;
+		}
+	}
+}
+
+void LinkedList::insert(int n, Node*ins)
+{
+	if (n == 0)
+	{
+		ins->next = head;
+		head = ins;
+		return;
+	}
+	else if (n == getlenght())
+	{
+		ins->next = nullptr;
+		last()->next = ins;
+		return;
+	}
+	else if (!indexValid(n))
+	{
+		return;
+	}
+	ins->next = get_ptr(n);
+	get_ptr(n - 1)->next = ins;
+}
+
 int LinkedList::getlenght()
 {
 	Node* t;
