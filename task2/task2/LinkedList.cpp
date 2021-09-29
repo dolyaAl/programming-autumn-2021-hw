@@ -28,6 +28,7 @@ LinkedList& LinkedList::operator=(const LinkedList& list)
 {
 	Node* t;
 	t = list.head;
+	this->del();
 	this->head = copy(t);
 	return *this;
 }
