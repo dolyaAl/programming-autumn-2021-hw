@@ -127,7 +127,7 @@ void DLinkedList::delp(int n)
 		delete t;
 		return;
 	}
-	if (n == getlenght())
+	if (n - 1 == getlenght())
 	{
 		DNode* t = tail;
 		tail = tail->prev;
@@ -162,20 +162,22 @@ void DLinkedList::reverse()
 		return;
 	}
 	DNode* t = head;
-	while (t != nullptr)
+	while (t->next != nullptr)
 	{
 		t->prev = t->next;
 		t = t->next;
 	}
+	t->prev = nullptr;
 	t = head;
+	DNode* p = nullptr;
+	
 	while (t != nullptr)
 	{
-		t->next = t;
+		t->next = p;
+		p = t;
 		t = t->prev;
 	}
 	t = head;
-	t->next = nullptr;
-	tail->prev = nullptr;
 	head = tail;
 	tail = t;
 }
@@ -266,6 +268,7 @@ void DLinkedList::del()
 			delete h;
 		}
 		head = t;
+		tail = nullptr;
 	}
 }
 DLinkedList& DLinkedList::operator=(const DLinkedList& list)
