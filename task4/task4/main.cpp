@@ -53,6 +53,10 @@ void del_sub(list<Sub>& l)
 		{
 			i = l.erase(i);
 		}
+		if (i == l.end())
+		{
+			return;
+		}
 		count = 30;
 	}
 }
